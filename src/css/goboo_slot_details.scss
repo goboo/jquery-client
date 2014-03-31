@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+/*
+ * GoBoo - GET IT. BOOK IT. [http://goboo.de]
+ *
+ * (c) Tristan Lins <t.lins@goboo.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@import "variables";
+
+.goboo_slot_details {
+	&.goboo_initializing,
+	&.goboo_loading,
+	&.goboo_no_slot {
+		height: 160px;
+		text-align: center;
+		line-height: 120px;
+
+		&:before {
+			display: inline-block;
+			line-height: 1.33em;
+		}
+		> * {
+			display: none !important;
+		}
+	}
+	&.goboo_initializing {
+		background-image: url(../images/loading.gif);
+		background-position: center center;
+		background-repeat: no-repeat;
+
+		&:before {
+			content: $initialisationText;
+		}
+	}
+	&.goboo_loading {
+		&:before {
+			content: $updateText;
+		}
+	}
+	&.goboo_no_slot {
+		line-height: 160px;
+
+		&:before {
+			content: $emptyText;
+		}
+	}
+
+	width: 160px;
+	margin: 0 auto;
+	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 6px #cecfd0;
+	background-color: rgba(255,255,255,0.85);
+	text-align: center;
+
+	.goboo_datetime {
+		margin-bottom: .5em;
+
+		span {
+			display: block;
+			font-size: 42px;
+		}
+	}
+	.goboo_duration {
+		margin: .5em 0;
+	}
+	.goboo_players_indicator {
+		display: inline-block;
+		overflow: hidden;
+		text-align: left;
+	}
+	.goboo_modes {
+		margin: .5em 0;
+
+		abbr {
+			margin: .25em;
+
+			&.goboo_mode_invalid {
+				text-decoration: line-through;
+			}
+			&.goboo_mode_prefered {
+				color: #b6c000;
+			}
+			@for $votes from 0 through 32 {
+				&[data-goboo-votes="#{$votes}"] {
+					font-size: 10px + $votes;
+				}
+			}
+		}
+	}
+	.goboo_book_action {
+		display: block;
+		margin-top: 1.5em;
+		text-transform: uppercase;
+		color: #b6c000;
+
+		&.goboo_disabled {
+			color: inherit;
+			cursor: default;
+			text-decoration: line-through;
+		}
+	}
+
+	/**
+	 * The following progress style based on the radial progress bar css from http://codepen.io/geedmo/pen/InFfd
+	 */
+
+	.goboo_players {
+		position: relative;
+		float: left;
+		margin: 10px;
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		border: 2px solid $progressBackgroundColor;
+		background-color: $progressBackgroundColor;
+
+		.goboo_overlay {
+			position: absolute;
+			width: 70px;
+			height: 70px;
+			background-color: $progressOverlayBackgroundColor;
+			color: $progressOverlayTextColor;
+			border-radius: 50%;
+			margin-left: 23px;
+			margin-top: 23px;
+			text-align: center;
+			line-height: 70px;
+		}
+	}
+
+	@for $loops from $progressMinPlayers through $progressMaxPlayers {
+		$increment: round(360 / $loops);
+		$half: round($loops / 2);
+
+		@for $i from 0 through ($loops - 1) {
+			.goboo_players.goboo_players_count_#{$loops}.goboo_players_#{$i} {
+				@if $i < $half {
+					$nextdeg: 90deg + ( $increment * $i );
+					background-image: linear-gradient(90deg, $progressBackgroundColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $progressForegroundColor 50%, $progressBackgroundColor 50%, $progressBackgroundColor);
+				}
+				@else {
+					$nextdeg: -90deg + ( $increment * ( $i - $half ) );
+					background-image: linear-gradient($nextdeg, $progressForegroundColor 50%, transparent 50%, transparent), linear-gradient(270deg, $progressForegroundColor 50%, $progressBackgroundColor 50%, $progressBackgroundColor);
+				}
+			}
+		}
+
+		.goboo_players.goboo_players_count_#{$loops}.goboo_players_#{$loops} {
+			background-image: linear-gradient(90deg, $progressForegroundColor 50%, transparent 50%, transparent), linear-gradient(270deg, $progressForegroundColor 50%, $progressBackgroundColor 50%, $progressBackgroundColor);
+		}
+	}
+}

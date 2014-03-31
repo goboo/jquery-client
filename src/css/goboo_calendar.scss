@@ -1,0 +1,249 @@
+@charset "UTF-8";
+
+/*
+ * GoBoo - GET IT. BOOK IT. [http://goboo.de]
+ *
+ * (c) Tristan Lins <t.lins@goboo.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@import "variables";
+
+@mixin slotHeight($count, $height, $topBorder: 0, $bottomBorder: 0, $lineHeightDivider: 1) {
+	$height: $height * $count + $topBorder * $count + $bottomBorder * $count - $calendarSlotTopBorder;
+	height: $height;
+	line-height: round(($height) / $lineHeightDivider);
+
+	.goboo_slot_players {
+		line-height: 10px + $count;
+
+		.goboo_slot_player {
+			height: 8px + $count;
+		}
+	}
+	&.goboo_slot_full {
+		.goboo_slot_players {
+			height: 8px + $count;
+			line-height: 4px + $count;
+		}
+	}
+}
+
+@mixin pauseHeight($count, $height, $topBorder: 0, $bottomBorder: 0) {
+	height: $height * $count + $topBorder * $count + $bottomBorder * $count - $calendarSlotTopBorder;
+}
+
+.goboo_calendar {
+	&.goboo_initializing {
+		height: 650px;
+		background-image: url(../images/loading.gif);
+		background-position: center center;
+		background-repeat: no-repeat;
+		text-align: center;
+		line-height: 600px;
+
+		&:before {
+			display: block;
+			content: 'goboo lädt\2026';
+		}
+		.goboo_date_selector,
+		.goboo_calendar {
+			display: none;
+		}
+	}
+	.goboo_date_selector {
+		text-align: center;
+		font-size: 2em;
+
+		.goboo_previous {
+			float: left;
+			margin-left: 5em;
+			width: 5em;
+			text-align: center;
+			color: #000;
+
+			&.goboo_button_disabled {
+				color: #ccc;
+				cursor: default;
+			}
+		}
+		.goboo_next {
+			float: right;
+			margin-right: 5em;
+			width: 5em;
+			text-align: center;
+			color: #000;
+		}
+		.goboo_current_date {
+			color: #000;
+		}
+	}
+	.goboo_calendar {
+		display: table;
+		width: 100%;
+
+		.goboo_times {
+			display: table-cell;
+			vertical-align: top;
+			width: 60px;
+			padding-top: 29px;
+			text-align: center;
+
+			.goboo_time_span {
+				border-top: $calendarSlotTopBorder solid #cecfd0;
+				@include slotHeight($calendarTimeSpanCount, $calendarSlotTimeUnitHeight, $calendarSlotTopBorder, 0, 2);
+				box-sizing: content-box;
+			}
+		}
+		.goboo_days {
+			display: table-cell;
+			vertical-align: top;
+
+			.goboo_empty {
+				padding-top: 30px;
+				background-image: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(0,0,0,.05) 16px, rgba(0,0,0,.05) 30px);
+				background-size: 42px 42px;
+				background-repeat: repeat;
+				text-align: center;
+
+				@for $i from 1 through $calendarEmptyMaxCount {
+					$time: $calendarSlotSmallestTimeUnit * $i;
+
+					&.goboo_empty_time_#{$time} {
+						height: ($calendarSlotTimeUnitHeight + $calendarSlotTopBorder + $calendarSlotBottomBorder) * $i;
+						line-height: ($calendarSlotTimeUnitHeight + $calendarSlotTopBorder + $calendarSlotBottomBorder) * $i;
+					}
+				}
+
+				&:after {
+					display: inline-block;
+					content: 'Keine Daten für diesen Zeitraum verfügbar!';
+					height: 1.66em;
+					line-height: 1.66em;
+					padding: .5em;
+					background-color: #fff;
+					border-radius: 5px;
+				}
+			}
+		}
+		.goboo_day {
+			display: inline-block;
+			text-align: center;
+			vertical-align: top;
+
+			&:nth-child(even) {
+				background-color: rgba(255, 255, 255, .85);
+			}
+			&:nth-child(odd) {
+				background-color: rgba(239, 239, 239, .85);
+			}
+
+			.goboo_day_name {
+				height: 28px;
+				line-height: 28px;
+				padding: 0 6px;
+				text-transform: uppercase;
+				text-align: left;
+				border-top: 1px solid #cecfd0;
+				border-bottom: 1px solid #cecfd0;
+				box-sizing: content-box;
+			}
+			.goboo_slot {
+				border-bottom: $calendarSlotBottomBorder solid #cecfd0;
+
+				.goboo_slot_button {
+					display: block;
+					padding: 0 6px;
+
+					.goboo_slot_players {
+						display: inline-block;
+						vertical-align: middle;
+
+						.goboo_slot_player {
+							display: inline-block;
+							margin: 0 1px;
+							width: 4px;
+							vertical-align: middle;
+
+							&.goboo_slot_player_used {
+								background-color: #d8ef35;
+							}
+							&.goboo_slot_player_free {
+								background-color: #f5fad0;
+							}
+						}
+					}
+					&.goboo_slot_empty {
+						.goboo_slot_players {
+							display: none;
+						}
+					}
+					&.goboo_slot_full {
+						.goboo_slot_players {
+							background: #9c9e9f;
+							display: inline-block;
+							vertical-align: middle;
+							padding: 3px 3px;
+							border-radius: 6px;
+
+							.goboo_slot_player {
+								margin-top: 0;
+							}
+						}
+					}
+					&.goboo_slot_locked {
+						text-align: center;
+
+						&:before {
+							content: '\000D7';
+						}
+						.goboo_slot_players {
+							display: none;
+						}
+					}
+					&:hover {
+						background-color: #333;
+					}
+				}
+				span.goboo_slot_button {
+					background-color: #aaa;
+				}
+
+				@for $i from 1 through $calendarSlotMaxTimeUnitCount {
+					$time: $calendarSlotSmallestTimeUnit * $i;
+
+					&.goboo_slot_duration_#{$time} {
+						.goboo_slot_button {
+							@include slotHeight($i, $calendarSlotTimeUnitHeight, 0, $calendarSlotBottomBorder);
+						}
+					}
+				}
+			}
+
+			.goboo_pause {
+				display: block;
+				background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0,0,0,.05) 5px, rgba(0,0,0,.05) 10px);
+				background-size: 14px 14px;
+				background-repeat: repeat;
+			}
+			@for $i from 1 through $calendarPauseMaxCount {
+				$time: $calendarSlotSmallestTimeUnit * $i;
+
+				.goboo_pause_#{$time} {
+					border-bottom: $calendarSlotBottomBorder solid #cecfd0;
+					@include pauseHeight($i, $calendarSlotTimeUnitHeight, 0, $calendarSlotBottomBorder);
+					box-sizing: content-box;
+				}
+			}
+		}
+		@for $i from 1 through 7 {
+			.goboo_day_count_#{$i} {
+				.goboo_day {
+					width: 100% / $i;
+				}
+			}
+		}
+	}
+}

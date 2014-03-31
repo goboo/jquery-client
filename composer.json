@@ -1,0 +1,43 @@
+{
+	"name": "goboo/jquery-client",
+	"description": "GoBoo - Client written in jQuery/JavaScript",
+	"keywords": ["goboo", "client", "javascript"],
+	"license": "MIT",
+	"type": "component",
+	"authors": [
+		{
+			"name": "Tristan Lins",
+			"email": "tristan.lins@bit3.de",
+			"homepage": "http://bit3.de",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "info@bit3.de",
+		"issues": "https://github.com/goboo/jquery-client/issues",
+		"source": "https://github.com/goboo/jquery-client"
+	},
+	"require": {
+		"robloach/component-installer": "*"
+	},
+	"require-dev": {
+		"bit3/packer": "dev-master",
+		"bit3/assetic-css-crush": "*"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"extra": {
+		"component": {
+			"scripts": [
+				"dist/jquery.goboo-client.deps.js",
+				"dist/jquery.goboo-client.js"
+			],
+			"files": [
+				"dist/jquery.goboo-client.min.js"
+			]
+		},
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}

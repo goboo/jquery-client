@@ -1,0 +1,24 @@
+
+/* *** slot details *** */
+$initialisationText: 'goboo lädt\2026';
+$updateText: 'aktualisiere Spieldaten\2026';
+$emptyText: 'keine Spieldaten verfügbar';
+
+$progressMinPlayers: 10;
+$progressMaxPlayers: 28;
+$progressBackgroundColor: #fff;
+$progressForegroundColor: #b6c000;
+$progressOverlayBackgroundColor: #5b5b5b;
+$progressOverlayTextColor: #fff;
+
+/* *** calendar *** */
+$calendarSlotTopBorder: 1px;
+$calendarSlotBottomBorder: 1px;
+$calendarSlotSmallestTimeUnit: 5; // 5 minutes
+$calendarSlotTimeUnitHeight: 4px;
+$calendarSlotMaxTimeUnitCount: 48; // 4 hours
+$calendarPauseMaxCount: 288; // 24 hours
+$calendarEmptyMaxCount: 288; // 24 hours
+$calendarTimeSpanCount: 12; // 1 hour
+
+@import "customer";

@@ -1,0 +1,82 @@
+filter:
+    csscrush:
+        class: Assetic\Filter\CssCrushFilter
+        debug: true
+
+packages:
+    dist/jquery.goboo-client.css:
+        filters: [scss, cssembed, csscrush]
+        files:
+            - src/css/goboo_slot_details.scss
+            - src/css/goboo_booking_mask.scss
+            - src/css/goboo_calendar.scss
+
+    dist/jquery.goboo-client.min.css:
+        filters: [csscrush, yui-css]
+        files:
+            - |
+                /*!
+                 * GoBoo - GET IT. BOOK IT. [http://goboo.de]
+                 *
+                 * (c) Tristan Lins <t.lins@goboo.de>
+                 *
+                 * For the full copyright and license information, please view the LICENSE
+                 * file that was distributed with this source code.
+                 */
+            - @dist/jquery.goboo-client.css
+
+    dist/jquery.goboo-client.js:
+        files:
+            - src/js/jquery.gobooSlotDetails.js
+            - src/js/jquery.gobooBookingMask.js
+            - src/js/jquery.gobooCalendar.js
+
+    dist/jquery.goboo-client.min.js:
+        filters: [yui-js]
+        files:
+            - |
+                /*!
+                 * GoBoo - GET IT. BOOK IT. [http://goboo.de]
+                 *
+                 * (c) Tristan Lins <t.lins@goboo.de>
+                 *
+                 * For the full copyright and license information, please view the LICENSE
+                 * file that was distributed with this source code.
+                 */
+            - @dist/jquery.goboo-client.js
+
+    dist/jquery.goboo-client.deps.css:
+        files:
+            - third-party/jquery-ui-1.10.4.custom.css
+            - third-party/tagit.ui-zendesk.css
+            - third-party/jquery.tagit.css
+
+    dist/jquery.goboo-client.deps.min.css:
+        filters: [yui-css]
+        files:
+            - |
+                /*!
+                 * This file contains the following third-party libraries:
+                 * - jquery ui 1.10.4 <http://jqueryui.com/>
+                 * - tagit <http://aehlke.github.io/tag-it/>
+                 */
+            - @dist/jquery.goboo-client.deps.css
+
+    dist/jquery.goboo-client.deps.js:
+        files:
+            - third-party/jquery.formatDateTime.js
+            - third-party/jquery-1.10.2.js
+            - third-party/jquery-ui-1.10.4.custom.js
+            - third-party/tag-it.js
+
+    dist/jquery.goboo-client.deps.min.js:
+        filters: [yui-js]
+        files:
+            - |
+                /*!
+                 * This file contains the following third-party libraries:
+                 * - jquery.formatDateTime <https://gist.github.com/tristanlins/6585391>
+                 * - jquery ui 1.10.4 <http://jqueryui.com/>
+                 * - tagit <http://aehlke.github.io/tag-it/>
+                 */
+            - @dist/jquery.goboo-client.deps.js
