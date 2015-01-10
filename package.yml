@@ -7,12 +7,12 @@ packages:
     dist/jquery.goboo-client.css:
         filters: [scss, cssembed, csscrush]
         files:
-            - src/css/goboo_slot_details.scss
-            - src/css/goboo_booking_mask.scss
-            - src/css/goboo_calendar.scss
+            - src/css/jquery.goboo-client.scss
+        watch:
+            - src/css/
 
     dist/jquery.goboo-client.min.css:
-        filters: [csscrush, yui-css]
+        filters: [yui-css]
         files:
             - |
                 /*!
@@ -64,9 +64,9 @@ packages:
 
     dist/jquery.goboo-client.deps.js:
         files:
-            - third-party/jquery.formatDateTime.js
             - third-party/jquery-1.10.2.js
             - third-party/jquery-ui-1.10.4.custom.js
+            - third-party/jquery.formatDateTime.js
             - third-party/tag-it.js
 
     dist/jquery.goboo-client.deps.min.js:

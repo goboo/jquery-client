@@ -1,0 +1,11 @@
+{
+    "name": "goboo/jquery-client",
+    "license": "MIT",
+    "authors": [
+        "Tristan Lins <t.lins@goboo.de>"
+    ],
+    "dependencies": {
+        "jquery": "1.11.*",
+        "jqueryui": "1.10.*"
+    }
+}

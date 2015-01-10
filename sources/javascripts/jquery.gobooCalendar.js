@@ -372,7 +372,7 @@
 			},
 			function(option, key) {
 				var value = element.data('goboo-' + key);
-				if (value !== undefined) {
+				if (value !== undefined && value !== null) {
 					templateOptions[option] = value;
 				}
 			}
@@ -835,6 +835,7 @@
 
 						if (slots && slots.length) {
 							var dayCount = 0;
+							var today    = $.formatDateTime('yymmdd', new Date());
 
 							$.each(slotsPerDay, function(day, items) {
 								while (requiredDays.length && requiredDays[0].numeric < day) {
@@ -855,6 +856,10 @@
 									var dayContainer = self.options.dayContainerFactory.call(self, requiredDay.date);
 									daysContainer.append(dayContainer);
 
+									if ($.formatDateTime('yymmdd', dayStartTime) == today) {
+										dayContainer.addClass('today');
+									}
+
 									var pauseElement = self.options.pauseFactory.call(self, (dayEndTime.getTime() - dayStartTime.getTime()) / 60000, true, true);
 									dayContainer.append(pauseElement);
 
@@ -868,6 +873,10 @@
 								var dayContainer = self.options.renderDay.call(self, items, dayStartTime, dayEndTime);
 								daysContainer.append(dayContainer);
 								dayCount ++;
+
+								if (day == today) {
+									dayContainer.addClass('today');
+								}
 							});
 
 							while (requiredDays.length) {
@@ -887,6 +896,10 @@
 
 								var dayContainer = self.options.dayContainerFactory.call(self, requiredDay.date);
 								daysContainer.append(dayContainer);
+
+								if ($.formatDateTime('yymmdd', dayStartTime) == today) {
+									dayContainer.addClass('today');
+								}
 
 								var pauseElement = self.options.pauseFactory.call(self, (dayEndTime.getTime() - dayStartTime.getTime()) / 60000, true, true);
 								dayContainer.append(pauseElement);

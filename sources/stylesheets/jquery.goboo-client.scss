@@ -21,4 +21,6 @@ $calendarPauseMaxCount: 288; // 24 hours
 $calendarEmptyMaxCount: 288; // 24 hours
 $calendarTimeSpanCount: 12; // 1 hour
 
-@import "customer";
+@import "goboo_calendar";
+@import "goboo_slot_details";
+@import "goboo_booking_mask";

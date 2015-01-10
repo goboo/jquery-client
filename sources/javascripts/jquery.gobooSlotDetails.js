@@ -328,13 +328,13 @@
 			},
 			function(option, key) {
 				var value = element.data('goboo-' + key);
-				if (value !== undefined) {
+				if (value !== undefined && value !== null) {
 					templateOptions[option] = value;
 				}
 			}
 		);
 
-		var options = $.extend({}, $.gobooSlotDetails.defaultOptions, options || {}, templateOptions);
+		options = $.extend({}, $.gobooSlotDetails.defaultOptions, options || {}, templateOptions);
 
 		new (function(container, options) {
 			var self = this;

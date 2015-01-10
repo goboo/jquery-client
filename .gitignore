@@ -1,5 +1,3 @@
-/package.local.yml
-
 # OS
 .DS_Store
 Thumbs.db
@@ -12,7 +10,9 @@ Thumbs.db
 /.idea/
 /nbproject/
 
-# Composer
+# Vendor
+/node_modules/
+/bower_components/
 /vendor/
 /components/
 /composer.phar

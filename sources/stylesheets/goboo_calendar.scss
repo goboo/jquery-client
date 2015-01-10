@@ -9,8 +9,6 @@
  * file that was distributed with this source code.
  */
 
-@import "variables";
-
 @mixin slotHeight($count, $height, $topBorder: 0, $bottomBorder: 0, $lineHeightDivider: 1) {
 	$height: $height * $count + $topBorder * $count + $bottomBorder * $count - $calendarSlotTopBorder;
 	height: $height;
