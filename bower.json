@@ -1,11 +1,21 @@
 {
-    "name": "goboo/jquery-client",
+    "name": "goboo-jquery-client",
+    "version": "1.0.0",
+    "description": "jQuery Client for the goboo booking system.",
+    "homepage": "http://goboo.de",
     "license": "MIT",
     "authors": [
-        "Tristan Lins <t.lins@goboo.de>"
+        "Tristan Lins <tristan@lins.io> (https://tristan.lins.io)"
     ],
+    "main": "dist/javascripts/jquery.goboo-client.js",
     "dependencies": {
-        "jquery": "1.11.*",
-        "jqueryui": "1.10.*"
-    }
+        "jquery": "^1.9",
+        "jquery-ui": "^1.11",
+        "goboo-js-adapter": "1.*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ]
 }
