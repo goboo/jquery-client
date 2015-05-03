@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     uglifyJs = require('gulp-uglify'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
+    twig = require('gulp-twig'),
 // image optimizers
     jpegtran = require('imagemin-jpegtran'),
     optipng = require('imagemin-optipng'),
@@ -28,6 +29,42 @@ gulp.task('install-bower', function () {
 gulp.task('install', ['install-bower']);
 
 /**
+ * Build demo tasks
+ */
+
+gulp.task('clean-demo', function (cb) {
+    del(['dist/demo'], cb);
+});
+
+gulp.task('build-demo-stylesheets', ['build-stylesheets'], function () {
+    return gulp.src([
+            'dist/stylesheets/jquery.goboo-client.with-deps.css*'
+        ])
+        .pipe(gulp.dest('dist/demo'));
+});
+
+gulp.task('build-demo-javascripts', ['build-javascripts'], function () {
+    return gulp.src([
+            'sources/demo/goboo-adapter.with-deps.js*',
+            'dist/javascripts/jquery.goboo-client.with-deps.js*'
+        ])
+        .pipe(gulp.dest('dist/demo'));
+});
+
+gulp.task('build-demo-assets', ['build-demo-stylesheets', 'build-demo-javascripts']);
+
+gulp.task('build-demo-templates', function () {
+    return gulp.src([
+            'sources/demo/*.twig'
+        ], {base: 'sources/demo'})
+        .pipe(plumber())
+        .pipe(twig())
+        .pipe(gulp.dest('dist/demo'));
+});
+
+gulp.task('build-demo', ['build-demo-assets', 'build-demo-templates']);
+
+/**
  * Build stylesheets tasks
  */
 gulp.task('clean-stylesheets', function (cb) {
@@ -35,8 +72,7 @@ gulp.task('clean-stylesheets', function (cb) {
 });
 
 gulp.task('build-stylesheet-jquery.goboo-client.css', function () {
-    return gulp.src(
-        [
+    return gulp.src([
             'sources/stylesheets/jquery.goboo-client.scss'
         ])
         .pipe(plumber())
@@ -83,7 +119,7 @@ gulp.task('build-stylesheet-jquery.goboo-client.with-deps.css', function () {
             cascade: false
         }))
         .pipe(concat('jquery.goboo-client.with-deps.css'))
-        .pipe(sourcemaps.write('.', {sourceRoot: '../../'}))
+        .pipe(sourcemaps.write('.', {sourceRoot: '../../sources/stylesheets'}))
         .pipe(gulp.dest('dist/stylesheets'));
 });
 
@@ -110,7 +146,7 @@ gulp.task('build-javascript-jquery.goboo-client.js', function () {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('jquery.goboo-client.js'))
         .pipe(uglifyJs())
-        .pipe(sourcemaps.write('.', {sourceRoot: '../sources/javascripts'}))
+        .pipe(sourcemaps.write('.', {sourceRoot: '../../sources/javascripts'}))
         .pipe(gulp.dest('dist/javascripts'));
 });
 
@@ -129,7 +165,7 @@ gulp.task('build-javascript-jquery.goboo-client.with-deps.js', function () {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('jquery.goboo-client.with-deps.js'))
         .pipe(uglifyJs())
-        .pipe(sourcemaps.write('.', {sourceRoot: '../sources/javascripts'}))
+        .pipe(sourcemaps.write('.', {sourceRoot: '../../sources/javascripts'}))
         .pipe(gulp.dest('dist/javascripts'));
 });
 
@@ -146,11 +182,9 @@ gulp.task('clean-images', function (cb) {
 });
 
 gulp.task('build-images', function () {
-    return gulp.src(
-        [
+    return gulp.src([
             'sources/images/**/*.{gif,jpg,png,svg}'
-        ],
-        {base: 'sources/images'})
+        ], {base: 'sources/images'})
         .pipe(plumber())
         .pipe(newer('dist/images'))
         .pipe(imagemin({
@@ -162,22 +196,28 @@ gulp.task('build-images', function () {
 /**
  * Global build tasks
  */
-gulp.task('clean', ['clean-stylesheets', 'clean-javascripts', 'clean-images']);
+gulp.task('clean', ['clean-demo', 'clean-stylesheets', 'clean-javascripts', 'clean-images']);
 
 gulp.task('build', function () {
     runSequence(
         'clean',
-        ['build-stylesheets', 'build-javascripts', 'build-images']
+        ['build-demo', 'build-stylesheets', 'build-javascripts', 'build-images']
     );
 });
 
 gulp.task('watch', function () {
     livereload.listen();
+    gulp.watch(['sources/demo/**/*.html', 'sources/demo/**/*.twig'], function() {
+        runSequence('build-demo-templates', livereload.changed);
+    });
+    gulp.watch('sources/demo/**/*.js', function() {
+        runSequence('build-demo-javascripts', livereload.changed);
+    });
     gulp.watch('sources/stylesheets/**/**', function() {
-        runSequence('build-stylesheets', livereload.changed);
+        runSequence(['build-stylesheets', 'build-demo-stylesheets'], livereload.changed);
     });
     gulp.watch('sources/javascripts/**/**', function() {
-        runSequence('build-javascripts', livereload.changed);
+        runSequence(['build-javascripts', 'build-demo-javascripts'], livereload.changed);
     });
     gulp.watch('sources/images/**/*', function() {
         runSequence('build-images', livereload.changed);
@@ -186,7 +226,7 @@ gulp.task('watch', function () {
 
 gulp.task('default', function () {
     runSequence(
-        ['build-templates', 'build-stylesheets', 'build-javascripts', 'build-images', 'build-fonts', 'build-shariff'],
+        ['build-demo', 'build-stylesheets', 'build-javascripts', 'build-images'],
         'watch'
     );
 });

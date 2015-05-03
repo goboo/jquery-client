@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+/*
+ * GoBoo - GET IT. BOOK IT. [http://goboo.de]
+ *
+ * (c) Tristan Lins <t.lins@goboo.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.goboo_booking {
+  .goboo_booking_exclusive {
+    margin-left: 26em;
+  }
+  .goboo_booking_successors {
+    margin-left: 26em;
+  }
+
+  &.goboo_no_modes {
+    .goboo_game_modes {
+      display: none;
+    }
+  }
+}
+

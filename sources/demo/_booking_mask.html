@@ -1,0 +1,108 @@
+<div id="goboo_booking"
+     class="goboo_booking goboo_slot_details goboo_initializing"
+     data-goboo-slot="upcoming"
+     data-goboo-day-start-offset="6">
+  <form method="post" action="#goboo_booking_mask" enctype="application/x-www-form-urlencoded">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div id="players-progress-bar" class="progress-bar" role="progressbar"
+               aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+            0 / 0
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Kontaktdaten</h3>
+
+        <div class="form-group">
+          <label for="ctrl_name">Dein Name</label>
+          <input name="name" id="ctrl_name" class="form-control" type="text" required>
+
+          <p class="help-block">(nicht Nickname)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_mobile">Deine Handynummer</label>
+          <input name="mobile" id="ctrl_mobile" class="form-control" type="tel" required>
+
+          <p class="help-block">(für Rückfragen)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_email">Deine E-Mail</label>
+          <input name="email" id="ctrl_email" class="form-control" type="email" required>
+
+          <p class="help-block">(für die Buchungsbestätigung)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_street">Straße</label>
+          <input name="street" id="ctrl_street" class="form-control" type="text" required>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="ctrl_postcode">PLZ</label>
+              <input name="postcode" id="ctrl_postcode" class="form-control" type="text" required>
+            </div>
+          </div>
+          <div class="col-xs-8">
+            <div class="form-group">
+              <label for="ctrl_city">Stadt</label>
+              <input name="city" id="ctrl_city" class="form-control" type="text" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Spieler</h3>
+
+        <div class="form-group">
+          <label for="ctrl_player_count">Spielerzahl</label>
+          <select name="player_count" id="ctrl_player_count" class="form-control" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="ctrl_player_name">Spielernamen</label>
+          <ul id="goboo_players"></ul>
+          <input id="ctrl_player_name" class="form-control" type="text">
+
+          <p class="help-block">
+            (optional) Gebe hier die Nicknames/Namen der einzelnen Spieler ein,
+            diese werden beim jeweiligen Slot angezeigt.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Extras</h3>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="exclusive">
+            Ich möchte die Halle exklusiv buchen.
+          </label>
+        </div>
+
+        <h3>weitere Spiele buchen</h3>
+
+        <div class="goboo_booking_successors_loader">
+          <img src="data:image/gif;base64,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">
+          lädt weitere Spiele
+        </div>
+        <div class="goboo_booking_successors_selection"></div>
+      </div>
+
+      <div class="col-xs-4">
+        <div class="goboo_details">
+          <div class="goboo_datetime" data-goboo="start-datetime"></div>
+          <div class="goboo_duration">Spielzeit: <span data-goboo="play-time"></span> Minuten</div>
+          <div class="goboo_modes" data-goboo="modes"></div>
+
+          <button name="action" value="book" class="btn btn-default">Jetzt buchen</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
