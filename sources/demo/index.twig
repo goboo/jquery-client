@@ -74,10 +74,10 @@
   // Initialize the goboo booking system client
   jQuery(function () {
     jQuery
-      .ajax('http://goboo.localdomain/web/app_dev.php/api/v3/rest/rooms')
+      .ajax('http://demo.goboo.io/api/v3/rest/rooms')
       .done(function (data) {
         // init adapter
-        goboo.init({host: 'demo.goboo.de'});
+        goboo.init({host: 'demo.goboo.io'});
 
         // create booking calendar
         var calendar = $('#goboo_calendar');
