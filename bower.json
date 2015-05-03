@@ -1,6 +1,6 @@
 {
     "name": "goboo-jquery-client",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "jQuery Client for the goboo booking system.",
     "homepage": "http://goboo.de",
     "license": "MIT",
