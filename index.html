@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoBoo&reg; jQuery Client Demo</title>
+
+  <!-- Bootstrap -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="jquery.goboo-client.with-deps.css" rel="stylesheet">
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<div class="container">
+  <h1>
+    GoBoo&reg; jQuery Client Demo
+    <small>based on Bootstrap 3.3</small>
+  </h1>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="container">
+  <h2>The calendar</h2>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="goboo_calendar" class="goboo_calendar goboo_initializing"
+     data-goboo-span="1week" data-goboo-start-of-week="1" data-goboo-day-start-offset="6">
+  <div class="goboo_date_selector">
+    <a href="#goboo_calendar" class="goboo_previous">&lt;</a>
+    <span class="goboo_current_date"
+          data-goboo-from-format="d." data-goboo-from-month-format="d. M"
+          data-goboo-until-format="d. M" data-goboo-until-month-format="d. M"></span>
+    <a href="#goboo_calendar" class="goboo_next">&gt;</a>
+  </div>
+
+  <div class="goboo_calendar">
+    <div class="goboo_times goboo_times_left" data-goboo-date-format="h:ii"></div>
+    <div class="goboo_days"></div>
+    <div class="goboo_times goboo_times_right" data-goboo-date-format="h:ii"></div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="container">
+  <h2>The slot detail view</h2>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="goboo_slot_details" class="goboo_slot_details goboo_initializing" data-goboo-slot="continuing">
+  <div class="goboo_datetime" data-goboo="start-datetime"></div>
+  <div class="goboo_duration">Spielzeit: <span data-goboo="play-time"></span> Minuten</div>
+  <div class="goboo_players_indicator">
+    <div class="goboo_players">
+      <span class="goboo_overlay">
+          <span data-goboo="attendance"></span> / <span data-goboo="capacity"></span>
+      </span>
+    </div>
+  </div>
+  <div class="goboo_modes" data-goboo="modes"></div>
+  <a href="#" class="goboo_book_action">Buchen</a>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="container">
+  <h2>The booking mask</h2>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="goboo_booking"
+     class="goboo_booking goboo_slot_details goboo_initializing"
+     data-goboo-slot="upcoming"
+     data-goboo-day-start-offset="6">
+  <form method="post" action="#goboo_booking_mask" enctype="application/x-www-form-urlencoded">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress">
+          <div id="players-progress-bar" class="progress-bar" role="progressbar"
+               aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+            0 / 0
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Kontaktdaten</h3>
+
+        <div class="form-group">
+          <label for="ctrl_name">Dein Name</label>
+          <input name="name" id="ctrl_name" class="form-control" type="text" required>
+
+          <p class="help-block">(nicht Nickname)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_mobile">Deine Handynummer</label>
+          <input name="mobile" id="ctrl_mobile" class="form-control" type="tel" required>
+
+          <p class="help-block">(für Rückfragen)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_email">Deine E-Mail</label>
+          <input name="email" id="ctrl_email" class="form-control" type="email" required>
+
+          <p class="help-block">(für die Buchungsbestätigung)</p>
+        </div>
+        <div class="form-group">
+          <label for="ctrl_street">Straße</label>
+          <input name="street" id="ctrl_street" class="form-control" type="text" required>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="ctrl_postcode">PLZ</label>
+              <input name="postcode" id="ctrl_postcode" class="form-control" type="text" required>
+            </div>
+          </div>
+          <div class="col-xs-8">
+            <div class="form-group">
+              <label for="ctrl_city">Stadt</label>
+              <input name="city" id="ctrl_city" class="form-control" type="text" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Spieler</h3>
+
+        <div class="form-group">
+          <label for="ctrl_player_count">Spielerzahl</label>
+          <select name="player_count" id="ctrl_player_count" class="form-control" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="ctrl_player_name">Spielernamen</label>
+          <ul id="goboo_players"></ul>
+          <input id="ctrl_player_name" class="form-control" type="text">
+
+          <p class="help-block">
+            (optional) Gebe hier die Nicknames/Namen der einzelnen Spieler ein,
+            diese werden beim jeweiligen Slot angezeigt.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <h3>Extras</h3>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="exclusive">
+            Ich möchte die Halle exklusiv buchen.
+          </label>
+        </div>
+
+        <h3>weitere Spiele buchen</h3>
+
+        <div class="goboo_booking_successors_loader">
+          <img src="data:image/gif;base64,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">
+          lädt weitere Spiele
+        </div>
+        <div class="goboo_booking_successors_selection"></div>
+      </div>
+
+      <div class="col-xs-4">
+        <div class="goboo_details">
+          <div class="goboo_datetime" data-goboo="start-datetime"></div>
+          <div class="goboo_duration">Spielzeit: <span data-goboo="play-time"></span> Minuten</div>
+          <div class="goboo_modes" data-goboo="modes"></div>
+
+          <button name="action" value="book" class="btn btn-default">Jetzt buchen</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="goboo-adapter.with-deps.js"></script>
+<script src="jquery.goboo-client.with-deps.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script>
+  // Initialize the goboo booking system client
+  jQuery(function () {
+    jQuery
+      .ajax('http://demo.goboo.io/api/v3/rest/rooms')
+      .done(function (data) {
+        // init adapter
+        goboo.init({host: 'demo.goboo.io'});
+
+        // create booking calendar
+        var calendar = $('#goboo_calendar');
+        calendar.gobooCalendar({
+          room: data[0].id,
+          showSlotDetails: function (slot) {
+            slotDetails.data('goboo').setSlot(slot);
+            location.hash = '';
+            location.hash = '#goboo_slot_details';
+          }
+        });
+
+        // create slot details view
+        var slotDetails = $('#goboo_slot_details');
+        slotDetails.gobooSlotDetails({
+          room: data[0].id,
+          showBookingMask: function (slot) {
+            bookingMask.data('goboo').setSlot(slot);
+            location.hash = '';
+            location.hash = '#goboo_booking';
+          }
+        });
+
+        // create booking mask
+        var bookingMask = $('#goboo_booking');
+        bookingMask.gobooBookingMask({
+          room: data[0].id,
+          renderPlayerCountInput: function (slot, callback) {
+            $.gobooBookingMask.defaultOptions.renderPlayerCountInput.call(this, slot, function (select) {
+              select.change(function() {
+                var attendance = slot.getAttendance() + parseInt(select.val());
+                var capacity   = slot.getCapacity();
+                $('#players-progress-bar')
+                        .css('width', (attendance / capacity * 100) + '%')
+                        .text(attendance + ' / ' + capacity);
+              }).change();
+              callback(select);
+            });
+          }
+        });
+      });
+  });
+</script>
+</body>
+</html>
