@@ -8,19 +8,19 @@ This is a [GoBoo](http://goboo.de) Client written in jQuery/JavaScript.
 Installation
 ------------
 
-Download the [jquery.goboo-client.js](dist/jquery.goboo-client.js) or the minified
-[jquery.goboo-client.min.js](dist/jquery.goboo-client.min.js), the
-[jquery.goboo-client.css](dist/jquery.goboo-client.css) or the minified
-[jquery.goboo-client.min.css](dist/jquery.goboo-client.min.css)
+Download the [jquery.goboo-client.js](dist/javascripts/jquery.goboo-client.js) or the minified
+[jquery.goboo-client.min.js](dist/javascripts/jquery.goboo-client.min.js), the
+[jquery.goboo-client.css](dist/stylesheets/jquery.goboo-client.css) or the minified
+[jquery.goboo-client.min.css](dist/stylesheets/jquery.goboo-client.min.css)
 and put them somewhere into your project.
 
-Also download the [jquery.goboo-client.deps.js](dist/jquery.goboo-client.deps.jss) or the minified
-[jquery.goboo-client.deps.min.js](dist/jquery.goboo-client.deps.min.js), the
-[jquery.goboo-client.deps.css](dist/jquery.goboo-client.deps.css) or the minified
-[jquery.goboo-client.deps.min.css](dist/jquery.goboo-client.deps.min.css)
+Also download the [jquery.goboo-client.deps.js](dist/javascripts/jquery.goboo-client.deps.jss) or the minified
+[jquery.goboo-client.deps.min.js](dist/javascripts/jquery.goboo-client.deps.min.js), the
+[jquery.goboo-client.deps.css](dist/stylesheets/jquery.goboo-client.deps.css) or the minified
+[jquery.goboo-client.deps.min.css](dist/stylesheets/jquery.goboo-client.deps.min.css)
 and put them somewhere into your project.
 
-For a basic markup, see the [html examples](html).
+For a basic markup, see the [html examples](dist/demo).
 
 Then add the following to your HTML:
 
@@ -44,5 +44,5 @@ Then add the following to your HTML:
 Customisation
 -------------
 
-For customisation manipulate write your own variable values into the [customer.scss](src/css/customer.scss),
-You can find a list of all available variables in the [variables.scss](src/css/variables.scss).
+For customisation include the [scss source](sources/stylesheets) into you build chain.
+You can find a list of all available variables in the [jquery.goboo-client.scss](sources/stylesheets/jquery.goboo-client.scss).
