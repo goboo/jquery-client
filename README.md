@@ -8,38 +8,60 @@ This is a [GoBoo](http://goboo.de) Client written in jQuery/JavaScript.
 Installation
 ------------
 
-Download the [jquery.goboo-client.js](dist/javascripts/jquery.goboo-client.js) or the minified
-[jquery.goboo-client.min.js](dist/javascripts/jquery.goboo-client.min.js), the
-[jquery.goboo-client.css](dist/stylesheets/jquery.goboo-client.css) or the minified
-[jquery.goboo-client.min.css](dist/stylesheets/jquery.goboo-client.min.css)
-and put them somewhere into your project.
+### with bower
 
-Also download the [jquery.goboo-client.deps.js](dist/javascripts/jquery.goboo-client.deps.jss) or the minified
-[jquery.goboo-client.deps.min.js](dist/javascripts/jquery.goboo-client.deps.min.js), the
-[jquery.goboo-client.deps.css](dist/stylesheets/jquery.goboo-client.deps.css) or the minified
-[jquery.goboo-client.deps.min.css](dist/stylesheets/jquery.goboo-client.deps.min.css)
-and put them somewhere into your project.
-
-For a basic markup, see the [html examples](dist/demo).
-
-Then add the following to your HTML:
-
-```html
-<link rel="stylesheet" type="text/css" href="jquery.goboo-client.deps.css">
-<link rel="stylesheet" type="text/css" href="jquery.goboo-client.css">
-
-<script src="path/to/jquery.goboo-client.deps.js"></script>
-<script src="path/to/jquery.goboo-client.js"></script>
-
-<!-- initialize the calendar -->
-<script>$('#goboo_calendar').gobooCalendar();</script>
-
-<!-- initialize the slot details -->
-<script>$('#goboo_slot_details').gobooSlotDetails();</script>
-
-<!-- initialize the booking mask -->
-<script>$('#goboo_booking').gobooBookingMask();</script>
+```bash
+$ bower install goboo-jquery-client
 ```
+
+### manually
+
+Download the current [repository archive](https://github.com/goboo/jquery-client/archive/master.zip).
+
+:heavy_exclamation_mark: You also need a copy of our [goboo-js-adapter](https://github.com/goboo/js-adapter/archive/master.zip)!
+
+Integration
+-----------
+
+Include the following files, depending on your needs.
+
+### with bower
+
+- Javascripts
+  - `bower_components/jquery/dist/jquery.min.js`
+  - `bower_components/jquery-ui/jquery-ui.min.js`
+  - `bower_components/date-w3c-format/Date.toW3CString.min.js`
+  - `bower_components/goboo-js-adapter/dist/javascripts/goboo-adapter.js`
+  - `bower_components/goboo-jquery-client/third-party/jquery.formatDateTime.js`
+  - `bower_components/goboo-jquery-client/third-party/tag-it.js`
+  - `bower_components/goboo-jquery-client/dist/javascripts/jquery.goboo-client.js`
+
+- Stylesheets
+  - `bower_components/jquery-ui/themes/base/jquery-ui.min.css`
+  - `bower_components/goboo-jquery-client/third-party/tagit.ui-zendesk.css`
+  - `bower_components/goboo-jquery-client/dist/stylesheets/jquery.goboo-client.css`
+
+### without bower
+
+- JavaScripts
+  - `assets/goboo-js-adapter/dist/javascripts/goboo-adapter.with-deps.js`, included dependencies:
+    - [Date.toW3CString](https://github.com/bit3/date-w3c-format)
+  - `assets/goboo-jquery-client/dist/javascripts/jquery.goboo-client.with-deps.js`, included dependencies:
+    - [jquery](https://jquery.org/)
+    - [jqueryui](http://jqueryui.com/)
+    - [jquery.formatDateTime](https://github.com/agschwender/jquery.formatDateTime)
+    - [jquery.tag-it](http://aehlke.github.io/tag-it/)
+
+- Stylesheets
+  - `assets/goboo-jquery-client/dist/stylesheets/jquery.goboo-client.with-deps.css`, included dependencies:
+    - [jqueryui](http://jqueryui.com/)
+    - [jquery.tag-it](http://aehlke.github.io/tag-it/)
+
+
+Markup
+------
+
+For a markup example, see the [demo files](dist/demo).
 
 Customisation
 -------------
