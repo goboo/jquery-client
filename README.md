@@ -61,7 +61,7 @@ Include the following files, depending on your needs.
 Markup
 ------
 
-For a markup example, see the [demo files](dist/demo).
+For a markup example, see the [demo files](dist/demo). For a running example see [goboo.github.io/jquery-client](http://goboo.github.io/jquery-client/).
 
 Customisation
 -------------
